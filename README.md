@@ -41,7 +41,7 @@ On your terminal, follow those steps:
 1. Clone those repository: `git clone https://github.com/nicknamedelta/nodeql.git`
 2. Enter on project's folder: `cd nodeql`
 3. Generate a Docker image from a Dockerfile: `docker build -t nicknamedelta/nodeql .`
-4. Start a new Docker container based on generated Docker image: `docker run -p 8080:8080 -d nicknamedelta/nodeql`
+4. Start a new Docker container based on generated Docker image: `docker run --name nodeql -p 8080:8080 -d nicknamedelta/nodeql`
 
 </details>
 
@@ -92,7 +92,27 @@ mutation createCustomer {
     }
   }
 }
+```
 
+```
+{
+  allCostumers {
+    id
+    name
+    email
+    cpf
+    dtBirth
+    address {
+      street
+      neighborhood
+      city
+      state
+      country
+      number
+      cep
+    }
+  }
+}
 ```
 
 ### Product:
@@ -115,7 +135,17 @@ mutation createProduct {
     price
   }
 }
+```
 
+```
+{
+  allProducts {
+    id
+    name
+    price
+    qttStock
+  }
+}
 ```
 
 ### Order:
@@ -143,7 +173,6 @@ mutation {
     }
   }
 }
-
 ```
 
 ## Contributing
