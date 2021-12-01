@@ -31,7 +31,7 @@ export default class EtherealMailProvider implements IMailProvider {
       from: 'Bagy <bagy@bagy.com.br>',
       to,
       subject,
-      text: body,
+      html: body,
     });
     return nodeMailer.getTestMessageUrl(message);
   }

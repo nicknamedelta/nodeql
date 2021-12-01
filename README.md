@@ -49,9 +49,10 @@ After finish the project setup, access http://localhost:8080/graphql to see the 
 
 ## :construction: To test this project?
 
-We're using Jest to make all Unitary Test in this project.
+We're using Jest to make all Unit Tests in this project.
 
-On your terminal, run: `npm run test`
+- Unit Tests using Jest(without Docker): `npm run test`
+- Unit Tests using Jest(with Docker): `docker exec -it <container_id> npm run test`
 
 ## :mag_right: GraphQl Querys and Mutations
 
