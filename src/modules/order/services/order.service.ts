@@ -44,6 +44,7 @@ export class OrderService {
             if (!prodStatus.productDB) {
                 throw Error(`Product ${prodStatus.prodId} was not found.`);
             }
+
             if (!prodStatus.hasInStock) {
                 throw Error(
                     `Product ${prodStatus.productDB.name} is out of stock.`,

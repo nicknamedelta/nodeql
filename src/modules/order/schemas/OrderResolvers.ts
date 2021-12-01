@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg } from 'type-graphql';
+import { Query, Resolver, Mutation, Arg } from 'type-graphql';
 import { ProductRepository } from '@modules/product/infra/typeorm/repository/ProductRepository';
 import { CustomerRepository } from '@modules/customer/infra/typeorm/repository/CustomerRepository';
 import EtherealMailProvider from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider';
@@ -7,6 +7,7 @@ import { AddOrderInput } from './types-input/AddOrderInput';
 import { OrderService } from '../services/order.service';
 import { OrderRepository } from '../infra/typeorm/repository/OrderRepository';
 import { OrderProductRepository } from '../infra/typeorm/repository/OrderProductRepository';
+import { Order } from '@shared/infra/http/graphql/entities';
 
 @Resolver()
 export default class OrderResolvers {
@@ -17,6 +18,11 @@ export default class OrderResolvers {
     new CustomerRepository(),
     new EtherealMailProvider(),
   );
+
+  @Query(() => [Order])
+  async allOrders(): Promise<Order[]> {
+    return Order.find({ relations: ['customer'] });
+  }
 
   @Mutation(() => TypeReturnCreateOrder)
   async createOrder(

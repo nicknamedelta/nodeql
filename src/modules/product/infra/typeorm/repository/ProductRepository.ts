@@ -14,6 +14,7 @@ export class ProductRepository implements IProductRepository {
 
   create(productIntput: AddProductInput): Promise<Product> {
     const productCreation = this.ormRepository.create(productIntput);
+
     return productCreation.save();
   }
 
@@ -29,11 +30,13 @@ export class ProductRepository implements IProductRepository {
       .map(productInOrder => {
         const { productDB, qttWanted } = productInOrder;
         const { id, qttStock } = productDB as Product;
+
         return this.ormRepository.update(
           { id },
           { qttStock: qttStock - qttWanted },
         );
       });
+
     await Promise.all(listProductsStockeUpdate);
   }
 }

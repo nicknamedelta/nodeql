@@ -96,8 +96,9 @@ mutation createCustomer {
 ```
 
 ```
+# allCustomers query
 {
-  allCostumers {
+  allCustomers {
     id
     name
     email
@@ -139,6 +140,7 @@ mutation createProduct {
 ```
 
 ```
+# allProducts query
 {
   allProducts {
     id
@@ -171,6 +173,21 @@ mutation {
       id
       name
       qttStock
+    }
+  }
+}
+```
+
+```
+# allOrders query
+{
+  allOrders {
+    id
+    status
+    installment
+    customer {
+      id
+      name
     }
   }
 }

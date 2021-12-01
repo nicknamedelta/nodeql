@@ -9,7 +9,7 @@ export default class CustomerResolvers {
   private customerRepository: CustomerRepository = new CustomerRepository();
 
   @Query(() => [Customer])
-  async allCostumers(): Promise<Customer[]> {
+  async allCustomers(): Promise<Customer[]> {
     return Customer.find({ relations: ['address', 'orders'] });
   }
 
