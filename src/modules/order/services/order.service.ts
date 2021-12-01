@@ -98,12 +98,6 @@ export class OrderService {
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>Order Confirmation</title>
             <style>
-                img {
-                    border: none;
-                    -ms-interpolation-mode: bicubic;
-                    max-width: 100%;
-                }
-
                 body {
                     background-color: #f6f6f6;
                     font-family: sans-serif;
@@ -195,11 +189,6 @@ export class OrderService {
                 ol li {
                     list-style-position: inside;
                     margin-left: 5px;
-                }
-
-                a {
-                    color: #3498db;
-                    text-decoration: underline;
                 }
 
                 .last {
