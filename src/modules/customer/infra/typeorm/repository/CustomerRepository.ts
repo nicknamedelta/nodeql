@@ -13,7 +13,7 @@ export class CustomerRepository implements ICustomerRepository {
     this.ormRepository = getRepository(Customer);
   }
 
-  public async findeById(id: number): Promise<Customer | undefined> {
+  public async findById(id: number): Promise<Customer | undefined> {
     return this.ormRepository.findOne({ where: { id } });
   }
 

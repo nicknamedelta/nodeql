@@ -25,7 +25,7 @@ export class OrderService {
         testEmailUrl: string;
     }> {
         const { listProducts, idCustomer, installment } = reqOrder;
-        const customer = await this.customerRepository.findeById(idCustomer);
+        const customer = await this.customerRepository.findById(idCustomer);
         if (!customer) {
             throw Error(`Customer was not found.`);
         }

@@ -7,7 +7,7 @@ import { AddCustomerInput } from '@modules/customer/schemas/types-input/AddCusto
 export class FakeCustomerRepository implements ICustomerRepository {
   private customers: Customer[] = [];
 
-  public async findeById(id: number): Promise<Customer | undefined> {
+  public async findById(id: number): Promise<Customer | undefined> {
     return this.customers.find(customerFake => customerFake.id === id);
   }
 
