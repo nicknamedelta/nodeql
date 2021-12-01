@@ -175,12 +175,3 @@ mutation {
   }
 }
 ```
-
-## Contributing
-
-1. Fork it (<https://github.com/nicknamedelta/nodeql/fork>)
-2. Create your feature branch (`git checkout -b feature`)
-3. Commit your changes (`git commit -am 'Type: some feature'`)
-    1. Available Types (replace in Type): add|fix|docs|chore|review
-4. Push to the branch (`git push origin feature`)
-5. Create a new Pull Request
