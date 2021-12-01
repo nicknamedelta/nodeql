@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.31% </span>
+                <span class="strong">92.45% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>48/52</span>
+                <span class='fraction'>49/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.91% </span>
+                <span class="strong">91.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/44</span>
+                <span class='fraction'>41/45</span>
             </div>
         
             
@@ -166,7 +166,16 @@
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -202,21 +211,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,7 +239,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -253,6 +268,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -272,6 +289,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -288,101 +306,110 @@ import IOrderProductRepository from '../repository/IOrderProductRepository';
 import IOrderRepository from '../repository/IOrderRepository';
 &nbsp;
 export class OrderService {
-  constructor(
-    private orderRepository: IOrderRepository,
-    private orderProductRepository: IOrderProductRepository,
-    private productRepository: IProductRepository,
-    private customerRepository: ICustomerRepository,
-    private mailProvider: IMailProvider,
-  ) {}
+    constructor(
+        private orderRepository: IOrderRepository,
+        private orderProductRepository: IOrderProductRepository,
+        private productRepository: IProductRepository,
+        private customerRepository: ICustomerRepository,
+        private mailProvider: IMailProvider,
+    ) {}
 &nbsp;
-  async execute(reqOrder: AddOrderInput): Promise&lt;{
-    order: Order;
-    products: Product[];
-    testEmailUrl: string;
-  }&gt; {
-    const { listProducts, idCustomer, installment } = reqOrder;
-    const customer = await this.customerRepository.findeById(idCustomer);
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!customer) {
-<span class="cstat-no" title="statement not covered" >      throw Error(`Customer was not found.`);</span>
+    async execute(reqOrder: AddOrderInput): Promise&lt;{
+        order: Order;
+        products: Product[];
+        testEmailUrl: string;
+    }&gt; {
+        const { listProducts, idCustomer, installment } = reqOrder;
+        const customer = await this.customerRepository.findeById(idCustomer);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!customer) {
+<span class="cstat-no" title="statement not covered" >            throw Error(`Customer was not found.`);</span>
+        }
+&nbsp;
+        const prodIds = [];
+        for (let i = 0; i &lt; listProducts.length; i += 1) {
+            prodIds.push(listProducts[i].id);
+        }
+&nbsp;
+        const products = await this.productRepository.findByListIds(prodIds);
+&nbsp;
+        const listProductStatus = listProducts.map(prodInOrder =&gt;
+            this.createListProductStatus(prodInOrder, products),
+        );
+        listProductStatus.forEach(prodStatus =&gt; {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!prodStatus.productDB) {
+<span class="cstat-no" title="statement not covered" >                throw Error(`Product ${prodStatus.prodId} was not found.`);</span>
+            }
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!prodStatus.hasInStock) {
+<span class="cstat-no" title="statement not covered" >                throw Error(</span>
+                    `Product ${prodStatus.productDB.name} is out of stock.`,
+                );
+            }
+        });
+&nbsp;
+        const orderSaved = await this.orderRepository.createOrder(
+            customer,
+            installment,
+        );
+&nbsp;
+        const testEmailUrl = await this.sendEmailOrder(customer, orderSaved);
+        await this.productRepository.updateStock(listProductStatus);
+        await this.orderProductRepository.createOrderProduct(
+            orderSaved,
+            listProductStatus,
+        );
+&nbsp;
+        const orderProducts = await this.orderProductRepository.findByOrder(
+            orderSaved,
+        );
+&nbsp;
+        return {
+            testEmailUrl: typeof testEmailUrl === 'string' ? <span class="branch-0 cbranch-no" title="branch not covered" >testEmailUrl </span>: '',
+            order: orderSaved,
+            products: orderProducts.map(orderProd =&gt; orderProd.product),
+        };
     }
 &nbsp;
-    const prodIds = [];
-    for (let i = 0; i &lt; listProducts.length; i += 1) {
-      prodIds.push(listProducts[i].id);
+    private createListProductStatus(
+        prodInOrder: ProductInOrder,
+        products: Product[],
+    ): IProductStatus {
+        const productDB = products.find(prod =&gt; prod.id === prodInOrder.id);
+        const hasInStock = this.checkStockAvailable(prodInOrder, productDB);
+        return {
+            hasInStock,
+            productDB,
+            qttWanted: prodInOrder.qtt,
+            prodId: prodInOrder.id,
+        };
     }
-    const products = await this.productRepository.findByListIds(prodIds);
 &nbsp;
-    const listProductStatus = listProducts.map(prodInOrder =&gt;
-      this.createListProductStatus(prodInOrder, products),
-    );
-    listProductStatus.forEach(prodStatus =&gt; {
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!prodStatus.productDB) {
-<span class="cstat-no" title="statement not covered" >        throw Error(`Product ${prodStatus.prodId} was not found.`);</span>
-      }
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (!prodStatus.hasInStock) {
-<span class="cstat-no" title="statement not covered" >        throw Error(`Product ${prodStatus.productDB.name} out of stock.`);</span>
-      }
-    });
+    private async sendEmailOrder(
+        customer: Customer,
+        order: Order,
+    ): Promise&lt;string | boolean&gt; {
+        const { name, email } = customer;
 &nbsp;
-    const orderSaved = await this.orderRepository.createOrder(
-      customer,
-      installment,
-    );
-    const testEmailUrl = await this.sendEmailOrder(customer, orderSaved);
-    await this.productRepository.updateStock(listProductStatus);
-    await this.orderProductRepository.createOrderProduct(
-      orderSaved,
-      listProductStatus,
-    );
-    const orderProducts = await this.orderProductRepository.findByOrder(
-      orderSaved,
-    );
-    return {
-      testEmailUrl: typeof testEmailUrl === 'string' ? <span class="branch-0 cbranch-no" title="branch not covered" >testEmailUrl </span>: '',
-      order: orderSaved,
-      products: orderProducts.map(orderProd =&gt; orderProd.product),
-    };
-  }
-&nbsp;
-  private createListProductStatus(
-    prodInOrder: ProductInOrder,
-    products: Product[],
-  ): IProductStatus {
-    const productDB = products.find(prod =&gt; prod.id === prodInOrder.id);
-    const hasInStock = this.checkStockAvailable(prodInOrder, productDB);
-    return {
-      hasInStock,
-      productDB,
-      qttWanted: prodInOrder.qtt,
-      prodId: prodInOrder.id,
-    };
-  }
-&nbsp;
-  private async sendEmailOrder(
-    customer: Customer,
-    order: Order,
-  ): Promise&lt;string | boolean&gt; {
-    const { email } = customer;
-    const resultMessageUrl = await this.mailProvider.sendEmail(
-      email,
-      `Order approved ${order.id}`,
-      `Order ${order.id}`,
-    );
-    return resultMessageUrl;
-  }
-&nbsp;
-  public checkStockAvailable(
-    prodInOrder: ProductInOrder,
-    product: Product | undefined,
-  ): boolean {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!product) {
-<span class="cstat-no" title="statement not covered" >      return false;</span>
+        const messageBody = `&lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta name="viewport" content="width=device-width"/&gt; &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/&gt; &lt;title&gt;Order Confirmation&lt;/title&gt; &lt;style&gt;body{background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;}table{border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;}table td{font-family: sans-serif; font-size: 14px; vertical-align: top;}.body{background-color: #f6f6f6; width: 100%;}.container{display: block; margin: 0 auto !important; max-width: 580px; padding: 10px; width: 580px;}.content{box-sizing: border-box; display: block; margin: 0 auto; max-width: 580px; padding: 10px;}.main{background: #fff; border-radius: 3px; width: 100%;}.wrapper{box-sizing: border-box; padding: 20px;}h1, h2, h3, h4{color: #000000; font-family: sans-serif; font-weight: 400; line-height: 1.4; margin: 0; margin-bottom: 30px;}h1{font-size: 35px; font-weight: 300; text-align: center; text-transform: capitalize;}p, ul, ol{font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;}p li, ul li, ol li{list-style-position: inside; margin-left: 5px;}.last{margin-bottom: 0;}.first{margin-top: 0;}.align-center{text-align: center;}.align-right{text-align: right;}.align-left{text-align: left;}.clear{clear: both;}.mt0{margin-top: 0;}.mb0{margin-bottom: 0;}.preheader{color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;}hr{border: 0; border-bottom: 1px solid #f6f6f6; margin: 20px 0;}@media only screen and (max-width: 620px){table[class='body'] h1{font-size: 28px !important; margin-bottom: 10px !important;}table[class='body'] p, table[class='body'] ul, table[class='body'] ol, table[class='body'] td, table[class='body'] span, table[class='body'] a{font-size: 16px !important;}table[class='body'] .wrapper, table[class='body'] .article{padding: 10px !important;}table[class='body'] .content{padding: 0 !important;}table[class='body'] .container{padding: 0 !important; width: 100% !important;}table[class='body'] .main{border-left-width: 0 !important; border-radius: 0 !important; border-right-width: 0 !important;}table[class='body'] .btn table{width: 100% !important;}table[class='body'] .btn a{width: 100% !important;}table[class='body'] .img-responsive{height: auto !important; max-width: 100% !important; width: auto !important;}}@media all{.ExternalClass{width: 100%;}.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div{line-height: 100%;}.apple-link a{color: inherit !important; font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; line-height: inherit !important; text-decoration: none !important;}}&lt;/style&gt; &lt;/head&gt; &lt;body class=""&gt; &lt;table border="0" cellpadding="0" cellspacing="0" class="body"&gt; &lt;tr&gt; &lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class="container"&gt; &lt;div class="content"&gt; &lt;table class="main"&gt; &lt;tr&gt; &lt;td class="wrapper"&gt; &lt;table border="0" cellpadding="0" cellspacing="0"&gt; &lt;tr&gt; &lt;td&gt; &lt;h1&gt;Order Confirmation&lt;/h1&gt; &lt;h2&gt; Hello, ${name}! &lt;/h2&gt; &lt;table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary"&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td align="left"&gt; &lt;table border="0" cellpadding="0" cellspacing="0"&gt; &lt;tbody&gt; &lt;tr&gt; &lt;td&gt; &lt;h4&gt;We received your order number #${order.id}&lt;/h4&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt; &lt;/table&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt; &lt;/table&gt; &lt;p&gt; If you received this email by mistake, simply delete it. &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;/body&gt; &lt;/html&gt;`;
+        const resultMessageUrl = await this.mailProvider.sendEmail(
+            email,
+            messageBody,
+            `Order confirmation number #${order.id}`,
+        );
+        return resultMessageUrl;
     }
-    const { qttStock: qttInStock } = product;
-    const { qtt: qttToBuy } = prodInOrder;
-    return qttInStock &gt;= qttToBuy;
-  }
+&nbsp;
+    public checkStockAvailable(
+        prodInOrder: ProductInOrder,
+        product: Product | undefined,
+    ): boolean {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!product) {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+        const { qttStock: qttInStock } = product;
+        const { qtt: qttToBuy } = prodInOrder;
+&nbsp;
+        return qttInStock &gt;= qttToBuy;
+    }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -391,7 +418,7 @@ export class OrderService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Nov 30 2021 17:32:20 GMT-0300 (Brasilia Standard Time)
+                at Tue Nov 30 2021 22:03:09 GMT-0300 (Brasilia Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
